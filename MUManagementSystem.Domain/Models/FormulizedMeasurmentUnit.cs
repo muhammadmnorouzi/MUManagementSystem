@@ -34,12 +34,12 @@ namespace MUManagementSystem.Domain.Models
 
         public decimal ToBase(decimal value)
         {
-            return this.CalculateToBase.Calculate(value);
+            return this.CalculateToBase.Calculator(value);
         }
 
         public decimal FromBase(decimal value)
         {
-            return this.CalculateFromBase.Calculate(value);
+            return this.CalculateFromBase.Calculator(value);
         }
     }
 }

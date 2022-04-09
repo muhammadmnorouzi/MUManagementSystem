@@ -52,11 +52,6 @@ namespace MUManagementSystem.Domain.Models
             return false;
         }
 
-        public decimal Calculate(decimal value)
-        {
-            return Calculator(value);
-        }
-
         private static Func<decimal , decimal> GetFunction(string formula)
         {
             return Eval.Compile<Func<decimal, decimal>>(formula, "a");

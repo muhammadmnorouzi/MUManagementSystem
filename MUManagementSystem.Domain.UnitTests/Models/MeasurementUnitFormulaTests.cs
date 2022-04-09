@@ -40,5 +40,22 @@ namespace MUManagementSystem.Domain.UnitTests.Models
             Should.Throw<InvalidMeasurementUnitFormulaException>(() => new MeasurementUnitFormula("( + )"));
             Should.Throw<InvalidMeasurementUnitFormulaException>(() => new MeasurementUnitFormula("4 + * "));
         }
+
+        [Fact]
+        public void Calculator_ShouldCalculateCorrectlyWhenObjectIsInstantiated()
+        {
+            // Given 
+            MeasurementUnitFormula formula1 = new MeasurementUnitFormula("a + 2");
+            MeasurementUnitFormula formula2 = new MeasurementUnitFormula("a * 2");
+            int a = 5;
+
+            // When
+            decimal result1 = formula1.Calculator(a);
+            decimal result2 = formula2.Calculator(a);
+
+            // Then
+            result1.ShouldBe(7);
+            result2.ShouldBe(10);
+        }
     }
 }

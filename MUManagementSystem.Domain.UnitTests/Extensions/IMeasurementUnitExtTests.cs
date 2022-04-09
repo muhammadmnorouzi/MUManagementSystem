@@ -10,61 +10,76 @@ namespace MUManagementSystem.Domain.UnitTests.Extensions
 {
     public class IMeasurementUnitExtTests
     {
-        [Fact]
-        public void ConvertTo_CoefficientMeasurementUnit_ShouldReturnSameValueForSameIMeasurementUnit()
+        private readonly IMeasurementUnit primary;
+        private readonly IMeasurementUnit formulized;
+        private readonly IMeasurementUnit coefficient;
+
+        public IMeasurementUnitExtTests()
         {
-            // Given
-            IMeasurementUnit measurementUnit = new CoefficientMeasurementUnit(
+            primary = new PrimaryMeasurementUnit(
+                Guid.NewGuid(),
+                "arbitrary",
+                "arb",
+                "some dimension");
+
+            formulized = new FormulizedMeasurmentUnit(
                 Guid.NewGuid(),
                 Guid.NewGuid(),
                 "arbitrary",
                 "arb",
-                1.7M);
-
-            decimal givenValue = 12.3M;
-
-            // When
-            decimal result = measurementUnit.ConvertTo(givenValue, measurementUnit);
-
-            // Then
-            result.ShouldBe(givenValue);
-        }
-
-        [Fact]
-        public void ConvertTo_FormulizedMeasurmentUnit_ShouldReturnSameValueForSameIMeasurementUnit()
-        {
-            // Given
-            IMeasurementUnit measurementUnit = new FormulizedMeasurmentUnit(
-                Guid.NewGuid() , 
-                Guid.NewGuid(), 
-                "arbitrary", 
-                "arb",
-                new MeasurementUnitFormula("a + 15") ,
+                new MeasurementUnitFormula("a + 15"),
                 new MeasurementUnitFormula("a - 15"));
 
-            decimal givenValue = 12.3M;
-
-            // When
-            decimal result = measurementUnit.ConvertTo(givenValue, measurementUnit);
-
-            // Then
-            result.ShouldBe(givenValue);
+            coefficient = new CoefficientMeasurementUnit(
+               Guid.NewGuid(),
+               Guid.NewGuid(),
+               "arbitrary",
+               "arb",
+               2.0M);
         }
 
         [Fact]
-        public void ConvertTo_PrimaryMeasurementUnit_ShouldReturnSameValueForSameIMeasurementUnit()
+        public void ConvertTo_FromOneToOther_ShouldReturnTheCorrectValue()
         {
-            // Given
-            IMeasurementUnit measurementUnit = new PrimaryMeasurementUnit(
-                Guid.NewGuid(), "arbitrary", "arb", "some dimension");
+            decimal givenValue = 16.0M;
+            decimal result = default;
 
-            decimal givenValue = 12.3M;
+            result = primary.ConvertTo(givenValue, formulized);
+            result.ShouldBe(givenValue + 15);
 
-            // When
-            decimal result = measurementUnit.ConvertTo(givenValue, measurementUnit);
+            result = primary.ConvertTo(givenValue, coefficient);
+            result.ShouldBe(givenValue * 2.0M);
+
+            result = coefficient.ConvertTo(givenValue, primary);
+            result.ShouldBe(givenValue / 2.0M);
+
+            result = coefficient.ConvertTo(givenValue, formulized);
+            result.ShouldBe(givenValue / 2.0M + 15);
+
+            result = formulized.ConvertTo(givenValue, primary);
+            result.ShouldBe(givenValue - 15);
+
+            result = formulized.ConvertTo(givenValue, coefficient);
+            result.ShouldBe((givenValue - 15) * 2.0M);
+        }
+
+        [Fact]
+        public void ConvertTo_FromOneToItself_ShouldReturnTheSame()
+        {
+            decimal givenValue = 16.0M;
 
             // Then
+            decimal result = default;
+
+            result = primary.ConvertTo(givenValue, primary);
             result.ShouldBe(givenValue);
+
+            result = coefficient.ConvertTo(givenValue, coefficient);
+            result.ShouldBe(givenValue);
+
+            result = formulized.ConvertTo(givenValue, formulized);
+            result.ShouldBe(givenValue);
+
         }
     }
 }

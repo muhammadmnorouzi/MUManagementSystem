@@ -1,4 +1,5 @@
 ﻿using MUManagementSystem.Common.Extensions;
+using MUManagementSystem.Domain.Exceptions;
 using MUManagementSystem.Domain.Models.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,17 @@ namespace MUManagementSystem.Domain.Models
             BaseMeasurementUnitId = baseMeasurementUnitId;
             Name = name.ThrowIfNullOrEmpty();
             Symbol = symbol.ThrowIfNullOrEmpty();
-            Ratio = ratio;
+            Ratio = ratio is  > 0 ? ratio : throw new InvalidRationException();
+        }
+
+        public decimal ToBase(decimal value)
+        {
+            return value / Ratio;
+        }
+
+        public decimal FromBase(decimal value)
+        {
+            return value * Ratio;
         }
     }
 }

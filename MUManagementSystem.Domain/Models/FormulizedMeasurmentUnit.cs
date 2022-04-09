@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace MUManagementSystem.Domain.Models
 {
-    public sealed class FormulizedMeasurmentUnit:BaseEntity,IMeasurementUnit
+    public sealed class FormulizedMeasurmentUnit : BaseEntity, IMeasurementUnit
     {
         public Guid BaseMeasurementUnitId { get; init; }
         public string Name { get; init; } = default!;
         public string Symbol { get; init; } = default!;
-        public MeasurementUnitFormula FromBase { get; init; } = default!;
-        public MeasurementUnitFormula ToBase { get; init; } = default!;
+        public MeasurementUnitFormula CalculateFromBase { get; init; } = default!;
+        public MeasurementUnitFormula CalculateToBase { get; init; } = default!;
 
         public FormulizedMeasurmentUnit(
             Guid id,
@@ -28,8 +28,18 @@ namespace MUManagementSystem.Domain.Models
             BaseMeasurementUnitId = baseMeasurementUnitId;
             Name = name.ThrowIfNullOrEmpty();
             Symbol = symbol.ThrowIfNullOrEmpty();
-            FromBase = fromBase.ThrowIfNull();
-            ToBase = toBase.ThrowIfNull();
+            CalculateFromBase = fromBase.ThrowIfNull();
+            CalculateToBase = toBase.ThrowIfNull();
+        }
+
+        public decimal ToBase(decimal value)
+        {
+            return this.CalculateToBase.Calculate(value);
+        }
+
+        public decimal FromBase(decimal value)
+        {
+            return this.CalculateFromBase.Calculate(value);
         }
     }
 }

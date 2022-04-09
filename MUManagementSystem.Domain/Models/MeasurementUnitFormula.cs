@@ -8,6 +8,20 @@ namespace MUManagementSystem.Domain.Models
     {
         public string Formula { get; }
 
+        private Func<decimal, decimal> _calculator = default!;
+        public Func<decimal , decimal> Calculator
+        {
+            get
+            {
+                if(_calculator is null)
+                {
+                    _calculator = GetFunction(this.Formula);
+                }
+
+                return _calculator;
+            }
+        }
+
         public MeasurementUnitFormula(string formula)
         {
             if (!IsValidFormula(formula))
@@ -27,7 +41,7 @@ namespace MUManagementSystem.Domain.Models
 
             try
             {
-                var result = Eval.Compile<Func<decimal , decimal>>(formula , "a");
+                var result = GetFunction(formula);
 
                 return true;
             }
@@ -36,6 +50,16 @@ namespace MUManagementSystem.Domain.Models
             }
 
             return false;
+        }
+
+        public decimal Calculate(decimal value)
+        {
+            return Calculator(value);
+        }
+
+        private static Func<decimal , decimal> GetFunction(string formula)
+        {
+            return Eval.Compile<Func<decimal, decimal>>(formula, "a");
         }
     }
 }

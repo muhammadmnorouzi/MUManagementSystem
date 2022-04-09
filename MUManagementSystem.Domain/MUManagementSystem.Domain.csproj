@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Functionalities\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Z.Expressions.Eval" Version="4.0.78" />
   </ItemGroup>
 

@@ -16,5 +16,15 @@ namespace MUManagementSystem.Domain.Models
             Symbol = symbol.ThrowIfNullOrEmpty();
             Dimonsion = dimonsion.ThrowIfNullOrEmpty();
         }
+
+        public decimal ToBase(decimal value)
+        {
+            return value;
+        }
+
+        public decimal FromBase(decimal value)
+        {
+            return value;
+        }
     }
 }

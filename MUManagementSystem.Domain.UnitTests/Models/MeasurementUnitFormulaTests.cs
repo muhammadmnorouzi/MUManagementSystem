@@ -15,6 +15,7 @@ namespace MUManagementSystem.Domain.UnitTests.Models
         [Fact]
         public void IsValidFormula_ShouldReturnTrueIfFormulaIsInCorrectFormat()
         {
+            MeasurementUnitFormula.IsValidFormula("a + 3.0M / 7").ShouldBe(true);
             MeasurementUnitFormula.IsValidFormula("8").ShouldBe(true);
             MeasurementUnitFormula.IsValidFormula("8 + 8").ShouldBe(true);
             MeasurementUnitFormula.IsValidFormula("a").ShouldBe(true);
@@ -30,6 +31,7 @@ namespace MUManagementSystem.Domain.UnitTests.Models
         [Fact]
         public void IsValidFormula_ShouldThrowInvalidMeasurementUnitFormulaExceptionWhenTheGivenFormulaIsInvalid()
         {
+            Should.Throw<InvalidMeasurementUnitFormulaException>(() => new MeasurementUnitFormula("a + 3.0 / 7"));
             Should.Throw<InvalidMeasurementUnitFormulaException>(() => new MeasurementUnitFormula("b"));
             Should.Throw<InvalidMeasurementUnitFormulaException>(() => new MeasurementUnitFormula("("));
             Should.Throw<InvalidMeasurementUnitFormulaException>(() => new MeasurementUnitFormula("())"));
@@ -37,7 +39,6 @@ namespace MUManagementSystem.Domain.UnitTests.Models
             Should.Throw<InvalidMeasurementUnitFormulaException>(() => new MeasurementUnitFormula("(a + )"));
             Should.Throw<InvalidMeasurementUnitFormulaException>(() => new MeasurementUnitFormula("( + )"));
             Should.Throw<InvalidMeasurementUnitFormulaException>(() => new MeasurementUnitFormula("4 + * "));
-
         }
     }
 }

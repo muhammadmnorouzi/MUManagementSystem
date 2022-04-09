@@ -1,4 +1,5 @@
 ﻿using MUManagementSystem.Domain.Models;
+using MUManagementSystem.Domain.Models.Abstractions;
 using Shouldly;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,29 @@ namespace MUManagementSystem.Domain.UnitTests.Models
 
             Should.Throw<ArgumentNullException>(() =>
                 new FormulizedMeasurmentUnit(id, baseMeasurementUnitId, goodStr, goodStr, goodFormula, null!));
+        }
+
+        [Fact]
+        public void ToBase_FromBase_ShouldReturnExpectedValue()
+        {
+            // Given
+            decimal givenA = 7.6M;
+
+            IMeasurementUnit measurementUnit = new FormulizedMeasurmentUnit(
+                   id: Guid.NewGuid(),
+                   baseMeasurementUnitId: Guid.NewGuid(),
+                   name: "arbitrary",
+                   symbol: "arb",
+                   fromBase: new MeasurementUnitFormula("(a / 8.1M) + 1"),
+                   toBase: new MeasurementUnitFormula("(a - 1 ) * 8.1M"));
+
+            // When
+            decimal fromBaseValue = measurementUnit.FromBase(givenA);
+            decimal toBaseValue = measurementUnit.ToBase(fromBaseValue);
+
+            // Then
+            fromBaseValue.ShouldBe(givenA / 8.1M + 1);
+            toBaseValue.ShouldBe(givenA);
         }
     }
 }

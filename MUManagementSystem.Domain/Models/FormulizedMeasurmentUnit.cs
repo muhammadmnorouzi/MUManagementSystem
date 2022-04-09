@@ -34,7 +34,7 @@ namespace MUManagementSystem.Domain.Models
 
         public decimal ToBase(decimal value)
         {
-            return this.CalculateToBase.Calculator(value);
+            return Math.Round(this.CalculateToBase.Calculator(value), 1);
         }
 
         public decimal FromBase(decimal value)

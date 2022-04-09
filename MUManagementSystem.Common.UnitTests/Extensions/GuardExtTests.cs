@@ -1,4 +1,5 @@
 ﻿using MUManagementSystem.Common.Extensions;
+using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,19 @@ namespace MUManagementSystem.Common.UnitTests.Extensions
             // Then
             Assert.Throws<ArgumentNullException>(() => emptyString.ThrowIfNullOrEmpty());
             Assert.Throws<ArgumentNullException>(() => nullString.ThrowIfNullOrEmpty());
+        }
+
+        [Fact]
+        public void ShouldReturnSameValueIfStringIsNotNullOrEmpty()
+        {
+            // Given
+            string givenString = "This is an example.";
+
+            // When
+            string returnedString = givenString.ThrowIfNullOrEmpty();
+
+            // Then
+            returnedString.ShouldBe(givenString);
         }
     }
 }

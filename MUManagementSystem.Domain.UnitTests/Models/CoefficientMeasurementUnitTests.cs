@@ -16,26 +16,31 @@ namespace MUManagementSystem.Domain.UnitTests.Models
         [Fact]
         public void Ctor_ShouldThrowExceptionsOnBadArguments()
         {
-            Should.Throw<ArgumentNullException>(() =>
-                new CoefficientMeasurementUnit(Guid.NewGuid(), Guid.NewGuid(), null!, "some thing", 1));
+            Guid id = Guid.NewGuid();
+            Guid baseMeasurementUnitId = Guid.NewGuid();
+            string goodStr = "some thing";
+            decimal goodRatio = 1;
 
             Should.Throw<ArgumentNullException>(() =>
-                new CoefficientMeasurementUnit(Guid.NewGuid(), Guid.NewGuid(), string.Empty, "some thing", 1));
+                new CoefficientMeasurementUnit(id, baseMeasurementUnitId, null!, goodStr, goodRatio));
 
             Should.Throw<ArgumentNullException>(() =>
-                new CoefficientMeasurementUnit(Guid.NewGuid(), Guid.NewGuid(), "some thing", null!, 1));
+                new CoefficientMeasurementUnit(id, baseMeasurementUnitId, string.Empty, goodStr, goodRatio));
 
             Should.Throw<ArgumentNullException>(() =>
-                new CoefficientMeasurementUnit(Guid.NewGuid(), Guid.NewGuid(), "some thing", string.Empty, 1));
+                new CoefficientMeasurementUnit(id, baseMeasurementUnitId, goodStr, null!, goodRatio));
+
+            Should.Throw<ArgumentNullException>(() =>
+                new CoefficientMeasurementUnit(id, baseMeasurementUnitId, goodStr, string.Empty, goodRatio));
 
             Should.Throw<InvalidRationException>(() =>
-                new CoefficientMeasurementUnit(Guid.NewGuid(), Guid.NewGuid(), "some thing", "some thing", 0));
+                new CoefficientMeasurementUnit(id, baseMeasurementUnitId, goodStr, goodStr, 0));
 
             Should.Throw<InvalidRationException>(() =>
-               new CoefficientMeasurementUnit(Guid.NewGuid(), Guid.NewGuid(), "some thing", "some thing", -1));
+               new CoefficientMeasurementUnit(id, baseMeasurementUnitId, goodStr, goodStr, -1));
 
             Should.Throw<InvalidRationException>(() =>
-               new CoefficientMeasurementUnit(Guid.NewGuid(), Guid.NewGuid(), "some thing", "some thing", -10));
+               new CoefficientMeasurementUnit(id, baseMeasurementUnitId, goodStr, goodStr, -10));
         }
 
         [Fact]

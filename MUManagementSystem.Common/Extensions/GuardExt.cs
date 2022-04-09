@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MUManagementSystem.Common.Extensions
+﻿namespace MUManagementSystem.Common.Extensions
 {
     public static class GuardExt
     {

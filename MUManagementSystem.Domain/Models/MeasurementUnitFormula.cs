@@ -1,5 +1,4 @@
 ﻿using MUManagementSystem.Domain.Exceptions;
-using System.Linq.Expressions;
 using Z.Expressions;
 
 namespace MUManagementSystem.Domain.Models
@@ -9,11 +8,11 @@ namespace MUManagementSystem.Domain.Models
         public string Formula { get; }
 
         private Func<decimal, decimal> _calculator = default!;
-        public Func<decimal , decimal> Calculator
+        public Func<decimal, decimal> Calculator
         {
             get
             {
-                if(_calculator is null)
+                if (_calculator is null)
                 {
                     _calculator = GetFunction(this.Formula);
                 }
@@ -34,7 +33,7 @@ namespace MUManagementSystem.Domain.Models
 
         public static bool IsValidFormula(string formula)
         {
-            if(string.IsNullOrEmpty(formula))
+            if (string.IsNullOrEmpty(formula))
             {
                 return false;
             }
@@ -52,7 +51,7 @@ namespace MUManagementSystem.Domain.Models
             return false;
         }
 
-        private static Func<decimal , decimal> GetFunction(string formula)
+        private static Func<decimal, decimal> GetFunction(string formula)
         {
             return Eval.Compile<Func<decimal, decimal>>(formula, "a");
         }

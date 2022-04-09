@@ -1,10 +1,9 @@
-﻿using System;
-
-using MUManagementSystem.Domain.Models.Abstractions;
+﻿using MUManagementSystem.Domain.Extensions;
 using MUManagementSystem.Domain.Models;
-using Xunit;
-using MUManagementSystem.Domain.Extensions;
+using MUManagementSystem.Domain.Models.Abstractions;
 using Shouldly;
+using System;
+using Xunit;
 
 namespace MUManagementSystem.Domain.UnitTests.Extensions
 {

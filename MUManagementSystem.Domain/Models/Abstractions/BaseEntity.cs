@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MUManagementSystem.Domain.Models.Abstractions
+﻿namespace MUManagementSystem.Domain.Models.Abstractions
 {
     public abstract class BaseEntity
     {

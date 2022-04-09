@@ -1,10 +1,5 @@
 ﻿using MUManagementSystem.Common.Extensions;
 using MUManagementSystem.Domain.Models.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MUManagementSystem.Domain.Models
 {

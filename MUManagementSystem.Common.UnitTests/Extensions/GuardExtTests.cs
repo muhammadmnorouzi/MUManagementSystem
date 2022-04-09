@@ -1,10 +1,6 @@
 ﻿using MUManagementSystem.Common.Extensions;
 using Shouldly;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace MUManagementSystem.Common.UnitTests.Extensions
@@ -20,7 +16,7 @@ namespace MUManagementSystem.Common.UnitTests.Extensions
             string nullString = null!;
 
             // Then
-             Should.Throw<ArgumentNullException>(() => emptyString.ThrowIfNullOrEmpty());
+            Should.Throw<ArgumentNullException>(() => emptyString.ThrowIfNullOrEmpty());
             Should.Throw<ArgumentNullException>(() => nullString.ThrowIfNullOrEmpty());
         }
 

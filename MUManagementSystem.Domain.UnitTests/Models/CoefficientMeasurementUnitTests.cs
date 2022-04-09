@@ -1,5 +1,6 @@
 ﻿using MUManagementSystem.Domain.Exceptions;
 using MUManagementSystem.Domain.Models;
+using MUManagementSystem.Domain.Models.Abstractions;
 using Shouldly;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace MUManagementSystem.Domain.UnitTests.Models
                 new CoefficientMeasurementUnit(Guid.NewGuid(), Guid.NewGuid(), string.Empty, "some thing", 1));
 
             Should.Throw<ArgumentNullException>(() =>
-                new CoefficientMeasurementUnit(Guid.NewGuid(), Guid.NewGuid(), "some thing", null!,1));
+                new CoefficientMeasurementUnit(Guid.NewGuid(), Guid.NewGuid(), "some thing", null!, 1));
 
             Should.Throw<ArgumentNullException>(() =>
                 new CoefficientMeasurementUnit(Guid.NewGuid(), Guid.NewGuid(), "some thing", string.Empty, 1));
@@ -35,6 +36,29 @@ namespace MUManagementSystem.Domain.UnitTests.Models
 
             Should.Throw<InvalidRationException>(() =>
                new CoefficientMeasurementUnit(Guid.NewGuid(), Guid.NewGuid(), "some thing", "some thing", -10));
+        }
+
+        [Fact]
+        public void ToBase_FromBase_ShouldReturnExpectedValue()
+        {
+            // Given
+            decimal givenRatio = 1.7M;
+            decimal givenValue = 10;
+
+            IMeasurementUnit measurementUnit = new CoefficientMeasurementUnit(
+                   id: Guid.NewGuid(),
+                   baseMeasurementUnitId: Guid.NewGuid(),
+                   name: "arbitrary",
+                   symbol: "arb",
+                   ratio: givenRatio);
+
+            // When
+            decimal fromBaseValue = measurementUnit.FromBase(givenValue);
+            decimal toBaseValue = measurementUnit.ToBase(fromBaseValue);
+
+            // Then
+            fromBaseValue.ShouldBe(givenValue * givenRatio);
+            toBaseValue.ShouldBe(givenValue);
         }
     }
 }

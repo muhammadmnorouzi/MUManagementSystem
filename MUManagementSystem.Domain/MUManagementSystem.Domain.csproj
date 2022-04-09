@@ -14,8 +14,4 @@
     <PackageReference Include="Z.Expressions.Eval" Version="4.0.78" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
-
 </Project>

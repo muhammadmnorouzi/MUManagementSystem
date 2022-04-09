@@ -11,7 +11,7 @@ namespace MUManagementSystem.Domain.UnitTests.Extensions
     public class IMeasurementUnitExtTests
     {
         [Fact]
-        public void CoefficientMeasurementUnit_ShouldReturnSameValueForSameIMeasurementUnit()
+        public void ConvertTo_CoefficientMeasurementUnit_ShouldReturnSameValueForSameIMeasurementUnit()
         {
             // Given
             IMeasurementUnit measurementUnit = new CoefficientMeasurementUnit(
@@ -31,7 +31,7 @@ namespace MUManagementSystem.Domain.UnitTests.Extensions
         }
 
         [Fact]
-        public void FormulizedMeasurmentUnit_ShouldReturnSameValueForSameIMeasurementUnit()
+        public void ConvertTo_FormulizedMeasurmentUnit_ShouldReturnSameValueForSameIMeasurementUnit()
         {
             // Given
             IMeasurementUnit measurementUnit = new FormulizedMeasurmentUnit(
@@ -52,7 +52,7 @@ namespace MUManagementSystem.Domain.UnitTests.Extensions
         }
 
         [Fact]
-        public void PrimaryMeasurementUnit_ShouldReturnSameValueForSameIMeasurementUnit()
+        public void ConvertTo_PrimaryMeasurementUnit_ShouldReturnSameValueForSameIMeasurementUnit()
         {
             // Given
             IMeasurementUnit measurementUnit = new PrimaryMeasurementUnit(

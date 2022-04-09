@@ -11,6 +11,26 @@ namespace MUManagementSystem.Domain.UnitTests.Extensions
     public class IMeasurementUnitExtTests
     {
         [Fact]
+        public void CoefficientMeasurementUnit_ShouldReturnSameValueForSameIMeasurementUnit()
+        {
+            // Given
+            IMeasurementUnit measurementUnit = new CoefficientMeasurementUnit(
+                Guid.NewGuid(),
+                Guid.NewGuid(),
+                "arbitrary",
+                "arb",
+                1.7M);
+
+            decimal givenValue = 12.3M;
+
+            // When
+            decimal result = measurementUnit.ConvertTo(givenValue, measurementUnit);
+
+            // Then
+            result.ShouldBe(givenValue);
+        }
+
+        [Fact]
         public void FormulizedMeasurmentUnit_ShouldReturnSameValueForSameIMeasurementUnit()
         {
             // Given

@@ -15,21 +15,16 @@ namespace MUManagementSystem.Domain.UnitTests.Models
         [Fact]
         public void IsValidFormula_ShouldReturnTrueIfFormulaIsInCorrectFormat()
         {
-            IEnumerable<string> validFormulas = new string[]
-            {
-               "a",
-               "(a)",
-               "1 + a" ,
-               "a * 2" ,
-               "1 * a / 4" ,
-               "(a + 1) * (3 / 8 * a) - a",
-               "((a + 2) / 3) * (3 - 7)"
-            };
-
-            foreach (string formula in validFormulas)
-            {
-                MeasurementUnitFormula.IsValidFormula(formula).ShouldBe(true);
-            }
+            MeasurementUnitFormula.IsValidFormula("8").ShouldBe(true);
+            MeasurementUnitFormula.IsValidFormula("8 + 8").ShouldBe(true);
+            MeasurementUnitFormula.IsValidFormula("a").ShouldBe(true);
+            MeasurementUnitFormula.IsValidFormula("(a)").ShouldBe(true);
+            MeasurementUnitFormula.IsValidFormula("1 + a").ShouldBe(true);
+            MeasurementUnitFormula.IsValidFormula("a * 2").ShouldBe(true);
+            MeasurementUnitFormula.IsValidFormula("1 * a / 4").ShouldBe(true);
+            MeasurementUnitFormula.IsValidFormula("1 * a / 4").ShouldBe(true);
+            MeasurementUnitFormula.IsValidFormula("(a + 1) * (3 / 8 * a) - a").ShouldBe(true);
+            MeasurementUnitFormula.IsValidFormula("((a + 2) / 3) * (3 - 7)").ShouldBe(true);
         }
 
         [Fact]

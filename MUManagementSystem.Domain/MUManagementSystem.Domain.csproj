@@ -10,4 +10,8 @@
     <ProjectReference Include="..\MUManagementSystem.Common\MUManagementSystem.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Functionalities\" />
+  </ItemGroup>
+
 </Project>

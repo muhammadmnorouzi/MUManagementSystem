@@ -1,5 +1,6 @@
 ﻿using MUManagementSystem.Domain.Exceptions;
 using System.Linq.Expressions;
+using Z.Expressions;
 
 namespace MUManagementSystem.Domain.Models
 {
@@ -19,7 +20,22 @@ namespace MUManagementSystem.Domain.Models
 
         public static bool IsValidFormula(string formula)
         {
-            throw new NotImplementedException();
+            if(string.IsNullOrEmpty(formula))
+            {
+                return false;
+            }
+
+            try
+            {
+                var result = Eval.Compile<Func<decimal , decimal>>(formula , "a");
+
+                return true;
+            }
+            catch
+            {
+            }
+
+            return false;
         }
     }
 }

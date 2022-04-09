@@ -14,11 +14,16 @@ namespace MUManagementSystem.Domain.UnitTests.Models
         [Fact]
         public void IsValidFormula_ShouldReturnTrueIfFormulaIsInCorrectFormat()
         {
-           IEnumerable<string> validFormulas = new string[]
-           {
-               "a", "(a)","1 + a" , "a * 2" , "1 * a / 4" , "(a + 1) * (3 / 8 * a) - a",
-               "((a + 2) / 3) * 3) - 7"
-           };
+            IEnumerable<string> validFormulas = new string[]
+            {
+               "a",
+               "(a)",
+               "1 + a" ,
+               "a * 2" ,
+               "1 * a / 4" ,
+               "(a + 1) * (3 / 8 * a) - a",
+               "((a + 2) / 3) * (3 - 7)"
+            };
 
             foreach (string formula in validFormulas)
             {

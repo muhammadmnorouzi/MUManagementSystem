@@ -48,6 +48,19 @@ namespace MUManagementSystem.Common.UnitTests.Extensions
             // Then
             Should.Throw<ArgumentNullException>(() => nullObject.ThrowIfNull());
         }
+
+        [Fact]
+        public void ThrowIfNull_ShouldReturnTheSameObjectWhenItIsNotNull()
+        {
+            // Given
+            object givenObject = new object();
+
+            // When
+            object returnedObject = givenObject.ThrowIfNull();
+
+            // Then
+            returnedObject.ShouldBe(givenObject);
+        }
         #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using MUManagementSystem.Domain.Models;
+﻿using MUManagementSystem.Domain.Exceptions;
+using MUManagementSystem.Domain.Models;
 using Shouldly;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,19 @@ namespace MUManagementSystem.Domain.UnitTests.Models
             {
                 MeasurementUnitFormula.IsValidFormula(formula).ShouldBe(true);
             }
+        }
+
+        [Fact]
+        public void IsValidFormula_ShouldThrowInvalidMeasurementUnitFormulaExceptionWhenTheGivenFormulaIsInvalid()
+        {
+            Should.Throw<InvalidMeasurementUnitFormulaException>(() => new MeasurementUnitFormula("b"));
+            Should.Throw<InvalidMeasurementUnitFormulaException>(() => new MeasurementUnitFormula("("));
+            Should.Throw<InvalidMeasurementUnitFormulaException>(() => new MeasurementUnitFormula("())"));
+            Should.Throw<InvalidMeasurementUnitFormulaException>(() => new MeasurementUnitFormula("(a 3)"));
+            Should.Throw<InvalidMeasurementUnitFormulaException>(() => new MeasurementUnitFormula("(a + )"));
+            Should.Throw<InvalidMeasurementUnitFormulaException>(() => new MeasurementUnitFormula("( + )"));
+            Should.Throw<InvalidMeasurementUnitFormulaException>(() => new MeasurementUnitFormula("4 + * "));
+
         }
     }
 }

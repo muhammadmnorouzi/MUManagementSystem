@@ -11,20 +11,21 @@ namespace MUManagementSystem.Common.UnitTests.Extensions
 {
     public class GuardExtTests
     {
+        #region ThrowIfNullOrEmpty Tests
         [Fact]
-        public void ShouldThrowIfStringIsNullOrEmpty()
+        public void ThrowIfNullOrEmpty_ShouldThrowIfStringIsNullOrEmpty()
         {
             // Given
             string emptyString = string.Empty;
             string nullString = null!;
 
             // Then
-            Assert.Throws<ArgumentNullException>(() => emptyString.ThrowIfNullOrEmpty());
-            Assert.Throws<ArgumentNullException>(() => nullString.ThrowIfNullOrEmpty());
+             Should.Throw<ArgumentNullException>(() => emptyString.ThrowIfNullOrEmpty());
+            Should.Throw<ArgumentNullException>(() => nullString.ThrowIfNullOrEmpty());
         }
 
         [Fact]
-        public void ShouldReturnSameValueIfStringIsNotNullOrEmpty()
+        public void ThrowIfNullOrEmpty_ShouldReturnSameValueIfStringIsNotNullOrEmpty()
         {
             // Given
             string givenString = "This is an example.";
@@ -35,5 +36,18 @@ namespace MUManagementSystem.Common.UnitTests.Extensions
             // Then
             returnedString.ShouldBe(givenString);
         }
+        #endregion
+
+        #region ThrowIfNull<T> Tests
+        [Fact]
+        public void ThrowIfNull_ShouldThrowIfTheObjectIsNull()
+        {
+            // Given
+            object nullObject = null!;
+
+            // Then
+            Should.Throw<ArgumentNullException>(() => nullObject.ThrowIfNull());
+        }
+        #endregion
     }
 }

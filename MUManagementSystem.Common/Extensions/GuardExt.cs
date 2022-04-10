@@ -15,5 +15,15 @@
                 ? throw new ArgumentNullException(nameof(data))
                 : data;
         }
+
+        public static decimal ThrowIfNegative(this decimal value)
+        {
+            if (value < 0)
+            {
+                throw new ArgumentException("value can not be negative.");
+            }
+
+            return value;
+        }
     }
 }

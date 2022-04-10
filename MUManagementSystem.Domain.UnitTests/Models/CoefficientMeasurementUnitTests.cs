@@ -7,7 +7,7 @@ using Xunit;
 
 namespace MUManagementSystem.Domain.UnitTests.Models
 {
-    public class CoefficientMeasurementUnitTests
+    public class CoefficientMeasurementUnitTests:TestsBase
     {
         [Fact]
         public void Ctor_ShouldThrowExceptionsOnBadArguments()
@@ -46,12 +46,7 @@ namespace MUManagementSystem.Domain.UnitTests.Models
             decimal givenRatio = 1.7M;
             decimal givenValue = 10;
 
-            IMeasurementUnit measurementUnit = new CoefficientMeasurementUnit(
-                   id: Guid.NewGuid(),
-                   baseMeasurementUnitId: Guid.NewGuid(),
-                   name: "arbitrary",
-                   symbol: "arb",
-                   ratio: givenRatio);
+            IMeasurementUnit measurementUnit = CreateCoefficientMeasurementUnit(ratio: givenRatio);
 
             // When
             decimal fromBaseValue = measurementUnit.FromBase(givenValue);
@@ -60,6 +55,14 @@ namespace MUManagementSystem.Domain.UnitTests.Models
             // Then
             fromBaseValue.ShouldBe(givenValue * givenRatio);
             toBaseValue.ShouldBe(givenValue);
+        }
+
+        [Fact]
+        public void GetBaseMeasurementUnitId_ShouldReturnBaseMeasurementUnitId()
+        {
+            CoefficientMeasurementUnit measurementUnit = CreateCoefficientMeasurementUnit();
+            
+            measurementUnit.GetBaseMeasurementUnitId().ShouldBe(measurementUnit.BaseMeasurementUnitId);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using MUManagementSystem.Domain.Extensions;
-using MUManagementSystem.Domain.Models;
 using MUManagementSystem.Domain.Models.Abstractions;
 using Shouldly;
 using System;

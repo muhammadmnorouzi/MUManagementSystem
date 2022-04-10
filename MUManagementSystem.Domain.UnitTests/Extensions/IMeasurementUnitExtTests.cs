@@ -9,17 +9,8 @@ namespace MUManagementSystem.Domain.UnitTests.Extensions
 {
     public class IMeasurementUnitExtTests
     {
-        private readonly IMeasurementUnit primary;
-        private readonly IMeasurementUnit formulized;
-        private readonly IMeasurementUnit coefficient;
-
         public IMeasurementUnitExtTests()
         {
-            primary = CreatePrimaryMeasurementUnit();
-
-            formulized = CreateFormulizedMeasurmentUnit();
-
-            coefficient = CreateCoefficientMeasurementUnit();
         }
 
         [Fact]
@@ -44,8 +35,17 @@ namespace MUManagementSystem.Domain.UnitTests.Extensions
         [Fact]
         public void ConvertTo_FromOneToOther_ShouldReturnTheCorrectValue()
         {
+            // Given
+            Guid baseMeasurementUnitId = Guid.NewGuid();
+
+            IMeasurementUnit primary = CreatePrimaryMeasurementUnit(baseMeasurementUnitId);
+            IMeasurementUnit formulized = CreateFormulizedMeasurmentUnit(baseMeasurementUnitId);
+            IMeasurementUnit coefficient = CreateCoefficientMeasurementUnit(baseMeasurementUnitId);
+
             decimal givenValue = 16.0M;
             decimal result = default;
+
+            // Then
 
             result = primary.ConvertTo(givenValue, formulized);
             result.ShouldBe(givenValue + 15);
@@ -69,6 +69,13 @@ namespace MUManagementSystem.Domain.UnitTests.Extensions
         [Fact]
         public void ConvertTo_FromOneToItself_ShouldReturnTheSame()
         {
+            // Given
+            Guid baseMeasurementUnitId = Guid.NewGuid();
+
+            IMeasurementUnit primary = CreatePrimaryMeasurementUnit(baseMeasurementUnitId);
+            IMeasurementUnit formulized = CreateFormulizedMeasurmentUnit(baseMeasurementUnitId);
+            IMeasurementUnit coefficient = CreateCoefficientMeasurementUnit(baseMeasurementUnitId);
+
             decimal givenValue = 16.0M;
 
             // Then

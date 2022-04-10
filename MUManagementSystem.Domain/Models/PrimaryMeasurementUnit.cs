@@ -26,5 +26,10 @@ namespace MUManagementSystem.Domain.Models
         {
             return value;
         }
+
+        public Guid GetBaseMeasurementUnitId()
+        {
+           return this.Id;
+        }
     }
 }

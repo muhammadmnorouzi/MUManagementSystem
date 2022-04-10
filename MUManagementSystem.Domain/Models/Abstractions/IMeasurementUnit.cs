@@ -8,5 +8,6 @@
 
         decimal ToBase(decimal value);
         decimal FromBase(decimal value);
+        Guid GetBaseMeasurementUnitId();
     }
 }

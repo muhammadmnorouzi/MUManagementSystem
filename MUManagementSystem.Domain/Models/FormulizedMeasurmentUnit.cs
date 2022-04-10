@@ -36,5 +36,10 @@ namespace MUManagementSystem.Domain.Models
         {
             return this.CalculateFromBase.Calculator(value);
         }
+
+        public Guid GetBaseMeasurementUnitId()
+        {
+            return this.BaseMeasurementUnitId;
+        }
     }
 }

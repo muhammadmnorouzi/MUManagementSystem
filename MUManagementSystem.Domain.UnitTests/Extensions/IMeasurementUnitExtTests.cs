@@ -94,7 +94,7 @@ namespace MUManagementSystem.Domain.UnitTests.Extensions
 
             return new CoefficientMeasurementUnit(
                Guid.NewGuid(),
-               baseMeasurementUnitId,
+               baseMeasurementUnitId.Value,
                "arbitrary",
                "arb",
                2.0M);

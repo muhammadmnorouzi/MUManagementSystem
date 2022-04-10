@@ -34,5 +34,10 @@ namespace MUManagementSystem.Domain.Models
         {
             return value * Ratio;
         }
+
+        public Guid GetBaseMeasurementUnitId()
+        {
+            return this.BaseMeasurementUnitId;
+        }
     }
 }

@@ -15,26 +15,30 @@ namespace MUManagementSystem.Domain.UnitTests.Extensions
 
         public IMeasurementUnitExtTests()
         {
-            primary = new PrimaryMeasurementUnit(
-                Guid.NewGuid(),
-                "arbitrary",
-                "arb",
-                "some dimension");
+            primary = CreatePrimaryMeasurementUnit();
 
-            formulized = new FormulizedMeasurmentUnit(
-                Guid.NewGuid(),
-                Guid.NewGuid(),
-                "arbitrary",
-                "arb",
-                new MeasurementUnitFormula("a + 15"),
-                new MeasurementUnitFormula("a - 15"));
+            formulized = CreateFormulizedMeasurmentUnit();
 
-            coefficient = new CoefficientMeasurementUnit(
-               Guid.NewGuid(),
-               Guid.NewGuid(),
-               "arbitrary",
-               "arb",
-               2.0M);
+            coefficient = CreateCoefficientMeasurementUnit();
+        }
+
+        [Fact]
+        public void ConvertTo_ShouldThrowInvalidOperationExceptionWhenBaseMeasurementUnitIdsAreNotEqual()
+        {
+            // Given
+            IMeasurementUnit primary = CreatePrimaryMeasurementUnit();
+            IMeasurementUnit formulized = CreateFormulizedMeasurmentUnit();
+            IMeasurementUnit coefficient = CreateCoefficientMeasurementUnit();
+
+            // Then
+            Should.Throw<InvalidOperationException>(() => primary.ConvertTo(1, formulized));
+            Should.Throw<InvalidOperationException>(() => primary.ConvertTo(1, coefficient));
+
+            Should.Throw<InvalidOperationException>(() => formulized.ConvertTo(1, primary));
+            Should.Throw<InvalidOperationException>(() => formulized.ConvertTo(1, coefficient));
+
+            Should.Throw<InvalidOperationException>(() => coefficient.ConvertTo(1, primary));
+            Should.Throw<InvalidOperationException>(() => coefficient.ConvertTo(1, formulized));
         }
 
         [Fact]
@@ -79,6 +83,51 @@ namespace MUManagementSystem.Domain.UnitTests.Extensions
             result = formulized.ConvertTo(givenValue, formulized);
             result.ShouldBe(givenValue);
 
+        }
+
+        private CoefficientMeasurementUnit CreateCoefficientMeasurementUnit(Guid? baseMeasurementUnitId = null)
+        {
+            if (!baseMeasurementUnitId.HasValue)
+            {
+                baseMeasurementUnitId = Guid.NewGuid();
+            }
+
+            return new CoefficientMeasurementUnit(
+               Guid.NewGuid(),
+               baseMeasurementUnitId,
+               "arbitrary",
+               "arb",
+               2.0M);
+        }
+
+        private FormulizedMeasurmentUnit CreateFormulizedMeasurmentUnit(Guid? baseMeasurementUnitId = null)
+        {
+            if (!baseMeasurementUnitId.HasValue)
+            {
+                baseMeasurementUnitId = Guid.NewGuid();
+            }
+
+            return new FormulizedMeasurmentUnit(
+                Guid.NewGuid(),
+                baseMeasurementUnitId.Value,
+                "arbitrary formulized",
+                "arb",
+                new MeasurementUnitFormula("a + 15"),
+                new MeasurementUnitFormula("a - 15"));
+        }
+
+        private PrimaryMeasurementUnit CreatePrimaryMeasurementUnit(Guid? baseMeasurementUnitId = null)
+        {
+            if (!baseMeasurementUnitId.HasValue)
+            {
+                baseMeasurementUnitId = Guid.NewGuid();
+            }
+
+            return new PrimaryMeasurementUnit(
+                 baseMeasurementUnitId.Value,
+                 "arbitrary primary",
+                 "arb",
+                 "some dimension");
         }
     }
 }

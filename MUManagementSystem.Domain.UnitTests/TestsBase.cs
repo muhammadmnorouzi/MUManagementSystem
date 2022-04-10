@@ -22,7 +22,10 @@ namespace MUManagementSystem.Domain.UnitTests
                ratio);
         }
 
-        public FormulizedMeasurmentUnit CreateFormulizedMeasurmentUnit(Guid? baseMeasurementUnitId = null)
+        public FormulizedMeasurmentUnit CreateFormulizedMeasurmentUnit(
+            Guid? baseMeasurementUnitId = null,
+            string fromBaseFormula = "a",
+            string toBaseFormula = "a")
         {
             if (!baseMeasurementUnitId.HasValue)
             {
@@ -34,8 +37,8 @@ namespace MUManagementSystem.Domain.UnitTests
                 baseMeasurementUnitId.Value,
                 "arbitrary formulized",
                 "arb",
-                new MeasurementUnitFormula("a + 15"),
-                new MeasurementUnitFormula("a - 15"));
+                new MeasurementUnitFormula(fromBaseFormula),
+                new MeasurementUnitFormula(toBaseFormula));
         }
 
         public PrimaryMeasurementUnit CreatePrimaryMeasurementUnit(Guid? baseMeasurementUnitId = null)

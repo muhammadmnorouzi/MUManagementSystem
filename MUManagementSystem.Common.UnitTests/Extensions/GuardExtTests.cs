@@ -58,5 +58,29 @@ namespace MUManagementSystem.Common.UnitTests.Extensions
             returnedObject.ShouldBe(givenObject);
         }
         #endregion
+
+        #region ThrowIfNegative Tests
+        [Fact]
+        public void ThrowIfNegative_ShouldThrowArgumentExceptionIfTheGivenValueIsNegative()
+        {
+            Should.Throw<ArgumentException>(() => (-0.01M).ThrowIfNegative());
+            Should.Throw<ArgumentException>(() => (-0.1M).ThrowIfNegative());
+            Should.Throw<ArgumentException>(() => (-1M).ThrowIfNegative());
+            Should.Throw<ArgumentException>(() => (-10M).ThrowIfNegative());
+        }
+
+        //[Fact]
+        //public void ThrowIfNull_ShouldReturnTheSameObjectWhenItIsNotNull()
+        //{
+        //    // Given
+        //    object givenObject = new object();
+
+        //    // When
+        //    object returnedObject = givenObject.ThrowIfNull();
+
+        //    // Then
+        //    returnedObject.ShouldBe(givenObject);
+        //}
+        #endregion
     }
 }

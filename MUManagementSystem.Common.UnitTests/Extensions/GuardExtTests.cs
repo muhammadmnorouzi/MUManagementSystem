@@ -69,18 +69,22 @@ namespace MUManagementSystem.Common.UnitTests.Extensions
             Should.Throw<ArgumentException>(() => (-10M).ThrowIfNegative());
         }
 
-        //[Fact]
-        //public void ThrowIfNull_ShouldReturnTheSameObjectWhenItIsNotNull()
-        //{
-        //    // Given
-        //    object givenObject = new object();
+        [Fact]
+        public void ThrowIfNegative_ShouldReturnSameValueIfTheGivenValueIsNotNegative()
+        {
+            // Given
+            decimal value1 = 0M;
+            decimal value2 = 1M;
+            decimal value3 = 2M;
+            decimal value4 = 3M;
+            decimal value5 = 4M;
 
-        //    // When
-        //    object returnedObject = givenObject.ThrowIfNull();
-
-        //    // Then
-        //    returnedObject.ShouldBe(givenObject);
-        //}
+            value1.ThrowIfNegative().ShouldBe(value1);
+            value2.ThrowIfNegative().ShouldBe(value2);
+            value3.ThrowIfNegative().ShouldBe(value3);
+            value4.ThrowIfNegative().ShouldBe(value4);
+            value5.ThrowIfNegative().ShouldBe(value5);
+        }
         #endregion
     }
 }

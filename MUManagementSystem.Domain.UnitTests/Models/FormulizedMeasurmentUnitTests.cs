@@ -6,7 +6,7 @@ using Xunit;
 
 namespace MUManagementSystem.Domain.UnitTests.Models
 {
-    public class FormulizedMeasurmentUnitTests
+    public class FormulizedMeasurmentUnitTests:TestsBase
     {
         [Fact]
         public void Ctor_ShouldThrowExceptionsOnBadArguments()
@@ -41,13 +41,9 @@ namespace MUManagementSystem.Domain.UnitTests.Models
             // Given
             decimal givenA = 7.6M;
 
-            IMeasurementUnit measurementUnit = new FormulizedMeasurmentUnit(
-                   id: Guid.NewGuid(),
-                   baseMeasurementUnitId: Guid.NewGuid(),
-                   name: "arbitrary",
-                   symbol: "arb",
-                   fromBase: new MeasurementUnitFormula("(a / 8.1M) + 1"),
-                   toBase: new MeasurementUnitFormula("(a - 1 ) * 8.1M"));
+            FormulizedMeasurmentUnit measurementUnit = CreateFormulizedMeasurmentUnit(
+                fromBaseFormula: "(a / 8.1M) + 1",
+                toBaseFormula: "(a - 1 ) * 8.1M");
 
             // When
             decimal fromBaseValue = measurementUnit.FromBase(givenA);
@@ -56,6 +52,14 @@ namespace MUManagementSystem.Domain.UnitTests.Models
             // Then
             fromBaseValue.ShouldBe(givenA / 8.1M + 1);
             toBaseValue.ShouldBe(givenA);
+        }
+
+        [Fact]
+        public void GetBaseMeasurementUnitId_ShouldReturnBaseMeasurementUnitId()
+        {
+            FormulizedMeasurmentUnit measurementUnit = CreateFormulizedMeasurmentUnit();
+
+            measurementUnit.GetBaseMeasurementUnitId().ShouldBe(measurementUnit.BaseMeasurementUnitId);
         }
     }
 }

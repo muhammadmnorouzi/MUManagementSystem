@@ -1,11 +1,13 @@
 ﻿using MUManagementSystem.Domain.Models;
 using System;
 
-namespace MUManagementSystem.Domain.UnitTests.Extensions
+namespace MUManagementSystem.Domain.UnitTests
 {
     public abstract class TestsBase
     {
-        public CoefficientMeasurementUnit CreateCoefficientMeasurementUnit(Guid? baseMeasurementUnitId = null)
+        public CoefficientMeasurementUnit CreateCoefficientMeasurementUnit(
+            Guid? baseMeasurementUnitId = null,
+            decimal ratio = 1.0M)
         {
             if (!baseMeasurementUnitId.HasValue)
             {
@@ -17,10 +19,13 @@ namespace MUManagementSystem.Domain.UnitTests.Extensions
                baseMeasurementUnitId.Value,
                "arbitrary",
                "arb",
-               2.0M);
+               ratio);
         }
 
-        public FormulizedMeasurmentUnit CreateFormulizedMeasurmentUnit(Guid? baseMeasurementUnitId = null)
+        public FormulizedMeasurmentUnit CreateFormulizedMeasurmentUnit(
+            Guid? baseMeasurementUnitId = null,
+            string fromBaseFormula = "a",
+            string toBaseFormula = "a")
         {
             if (!baseMeasurementUnitId.HasValue)
             {
@@ -32,8 +37,8 @@ namespace MUManagementSystem.Domain.UnitTests.Extensions
                 baseMeasurementUnitId.Value,
                 "arbitrary formulized",
                 "arb",
-                new MeasurementUnitFormula("a + 15"),
-                new MeasurementUnitFormula("a - 15"));
+                new MeasurementUnitFormula(fromBaseFormula),
+                new MeasurementUnitFormula(toBaseFormula));
         }
 
         public PrimaryMeasurementUnit CreatePrimaryMeasurementUnit(Guid? baseMeasurementUnitId = null)

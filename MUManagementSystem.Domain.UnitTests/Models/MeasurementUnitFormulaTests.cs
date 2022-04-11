@@ -52,5 +52,22 @@ namespace MUManagementSystem.Domain.UnitTests.Models
             result1.ShouldBe(7);
             result2.ShouldBe(10);
         }
+
+        [Fact]
+        public void GetHashCode_ShouldReturnSameHashCodeValueAsFormulaInjected()
+        {
+            // Given 
+            string formula1 = "a + 1",
+                formula2 = "a * 1" ,
+                formula3 = "(a) * 1" ,
+                formula4 = "(a / 1)" ,
+                formula5 = "a - (a * 3) * 7";
+
+            new MeasurementUnitFormula(formula1).GetHashCode().ShouldBe(formula1.GetHashCode());
+            new MeasurementUnitFormula(formula2).GetHashCode().ShouldBe(formula2.GetHashCode());
+            new MeasurementUnitFormula(formula3).GetHashCode().ShouldBe(formula3.GetHashCode());
+            new MeasurementUnitFormula(formula4).GetHashCode().ShouldBe(formula4.GetHashCode());
+            new MeasurementUnitFormula(formula5).GetHashCode().ShouldBe(formula5.GetHashCode());
+        }
     }
 }

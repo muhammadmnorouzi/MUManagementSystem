@@ -6,7 +6,7 @@ using Xunit;
 
 namespace MUManagementSystem.Domain.UnitTests.Extensions
 {
-    public class IMeasurementUnitExtTests:TestsBase
+    public class IMeasurementUnitExtTests : TestsBase
     {
         public IMeasurementUnitExtTests()
         {
@@ -38,8 +38,8 @@ namespace MUManagementSystem.Domain.UnitTests.Extensions
             Guid baseMeasurementUnitId = Guid.NewGuid();
 
             IMeasurementUnit primary = CreatePrimaryMeasurementUnit(baseMeasurementUnitId);
-            IMeasurementUnit formulized = CreateFormulizedMeasurmentUnit(baseMeasurementUnitId);
-            IMeasurementUnit coefficient = CreateCoefficientMeasurementUnit(baseMeasurementUnitId);
+            IMeasurementUnit formulized = CreateFormulizedMeasurmentUnit(baseMeasurementUnitId, fromBaseFormula: "a + 15", toBaseFormula: "a - 15");
+            IMeasurementUnit coefficient = CreateCoefficientMeasurementUnit(baseMeasurementUnitId , ratio: 2.0M);
 
             decimal givenValue = 16.0M;
             decimal result = default;

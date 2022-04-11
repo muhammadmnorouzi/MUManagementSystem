@@ -51,6 +51,11 @@ namespace MUManagementSystem.Domain.Models
             return false;
         }
 
+        public override int GetHashCode()
+        {
+            return this.Formula.GetHashCode();
+        }
+
         private static Func<decimal, decimal> GetFunction(string formula)
         {
             return Eval.Compile<Func<decimal, decimal>>(formula, "a");
